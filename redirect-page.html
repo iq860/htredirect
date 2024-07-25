@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var redirectUrl = urlParams.get('utm_redirect');
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                document.body.innerHTML = '<p>No redirect URL specified.</p>';
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>If you are not redirected automatically, <a id="redirect-link" href="#">click here</a>.</p>
+    <script>
+        var link = document.getElementById('redirect-link');
+        var urlParams = new URLSearchParams(window.location.search);
+        var redirectUrl = urlParams.get('utm_redirect');
+        if (redirectUrl) {
+            link.href = redirectUrl;
+        }
+    </script>
+</body>
+</html>
