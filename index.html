@@ -9,7 +9,18 @@
             var urlParams = new URLSearchParams(window.location.search);
             var redirectUrl = urlParams.get('utm_redirect');
             if (redirectUrl) {
-                window.location.href = redirectUrl;
+                // Create a new URL object
+                var finalUrl = new URL(redirectUrl);
+                
+                // Append all parameters except utm_redirect
+                urlParams.forEach(function(value, key) {
+                    if (key !== 'utm_redirect') {
+                        finalUrl.searchParams.append(key, value);
+                    }
+                });
+                
+                // Redirect to the final URL
+                window.location.href = finalUrl.toString();
             } else {
                 document.body.innerHTML = '<p>No redirect URL specified.</p>';
             }
@@ -23,7 +34,13 @@
         var urlParams = new URLSearchParams(window.location.search);
         var redirectUrl = urlParams.get('utm_redirect');
         if (redirectUrl) {
-            link.href = redirectUrl;
+            var finalUrl = new URL(redirectUrl);
+            urlParams.forEach(function(value, key) {
+                if (key !== 'utm_redirect') {
+                    finalUrl.searchParams.append(key, value);
+                }
+            });
+            link.href = finalUrl.toString();
         }
     </script>
 </body>
